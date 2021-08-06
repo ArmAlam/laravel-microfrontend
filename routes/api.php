@@ -14,4 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('/users', 'UserController@index');
+Route::post('/login', 'AuthController@login');
+
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::apiResource('/users', 'UserController');
+});
+
